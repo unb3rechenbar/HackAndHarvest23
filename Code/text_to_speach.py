@@ -23,7 +23,7 @@ import openai
 
 
 # Definieren Sie den Text, auf den geantwortet werden soll
-openai.api_key = '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'
+openai.api_key = ''
 audio_file= open("Aufnahme.m4a", "rb")
 transcript = openai.Audio.transcribe("whisper-1", audio_file)
 text1=str(transcript)
