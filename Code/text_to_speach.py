@@ -8,6 +8,85 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id) #einzige deutsche Stimme
 
 # Konvertiere Text in Sprache
+#engine.say("Hallo, mein Name ist Heymex. Darf ich ihre Sauerstoffsättigung messen?")
+
+
+# Warte, bis die Konvertierung abgeschlossen ist
+engine.runAndWait()
+
+#!/usr/bin/env python3
+
+# NOTE: this example requires PyAudio because it uses the Microphone class
+
+# Note: you need to be using OpenAI Python v0.27.0 for the code below to work
+import openai
+
+
+# Definieren Sie den Text, auf den geantwortet werden soll
+openai.api_key = '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'
+audio_file= open("Aufnahme.m4a", "rb")
+transcript = openai.Audio.transcribe("whisper-1", audio_file)
+text1=str(transcript)
+text1=text1[12:]
+print(text1)
+"""# Verwende die create()-Methode, um eine Antwort von der KI zu erhalten
+response = openai.Completion.create(
+  engine="ada", # wähle eines der verfügbaren GPT-3-Modelle
+  prompt=str(text1),
+  max_tokens=60 # Anzahl der Token in der Antwort
+)
+
+# Extrahiere die Antwort aus der API-Antwort
+answer = response.choices[0].text.strip()
+
+
+print(answer)"""
+
+
+
+# Funktion zum Generieren einer Chatantwort
+def generate_chat_response(prompt):
+    print("test")
+    response = openai.Completion.create(
+        engine='text-davinci-003',  # Wählen Sie das gewünschte Modell, z.B. text-davinci-003
+        prompt=prompt,
+        max_tokens=100,  # Maximale Anzahl der generierten Tokens
+        temperature=0.7,  # Steuerung der Kreativität des Modells (0.2 für konservativeres Verhalten, 1.0 für experimentelleres Verhalten)
+        n=1,  # Anzahl der generierten Antwortvorschläge
+        stop=None,  # Optionale Liste von Stop-Wörtern, um die Antwort zu begrenzen
+        timeout=10  # Maximale Dauer für die Generierung der Antwort in Sekunden
+    )
+
+    if response.choices:
+        return response.choices[0].text.strip()
+    else:
+        return None
+
+# Beispielanwendung
+prompt = text1
+response = generate_chat_response(prompt)
+print("ChatGPT: " + response)
+
+
+
+
+
+
+
+
+
+
+"""
+import pyttsx3
+
+# Initialisiere den Text-to-Speech-Engine
+engine = pyttsx3.init()
+
+# Ändere die Stimme zur "Microsoft Hedda"-Stimme
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id) #einzige deutsche Stimme
+
+# Konvertiere Text in Sprache
 engine.say("Guten Tag, mein Name ist Heyex. Ich werde sie heute betreuen und sie werden nichts bereuen.")
 
 engine.say("Bitte warten sie noch einen Moment")
@@ -49,3 +128,4 @@ for voice in voices:
     print(f" - ID: {voice.id}")
     print(f" - Geschlecht: {voice.gender}")
     print(f" - Alter: {voice.age}")
+    """
