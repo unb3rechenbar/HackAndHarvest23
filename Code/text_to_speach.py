@@ -7,14 +7,17 @@ engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id) #einzige deutsche Stimme
 
+text="Hallo, mein Name ist Heymex. Darf ich ihre Sauerstoffsättigung messen?"
 # Konvertiere Text in Sprache
-#engine.say("Hallo, mein Name ist Heymex. Darf ich ihre Sauerstoffsättigung messen?")
+engine.say(text)
 
+# Convert text to speech and save it as an MP3 file
+engine.save_to_file(text, 'output.mp3')
 
 # Warte, bis die Konvertierung abgeschlossen ist
 engine.runAndWait()
 
-#!/usr/bin/env python3
+
 
 # NOTE: this example requires PyAudio because it uses the Microphone class
 
